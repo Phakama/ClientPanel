@@ -3,6 +3,7 @@ import { ClientService } from '../../services/client.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { Client } from '../../models/Client';
+import { timeout } from 'q';
 
 @Component({
   selector: 'app-client-details',
@@ -28,8 +29,8 @@ export class ClientDetailsComponent implements OnInit {
     //get the client
     this.clientService.getClient(this.id).subscribe(client => {
       this.client = client;
-      if(client != null) {
-        if(client.balance > 0) {
+      if (client != null) {
+        if (client.balance > 0) {
           this.hasBalance = true;
         }
       }
@@ -37,4 +38,8 @@ export class ClientDetailsComponent implements OnInit {
     });
   }
 
+  updateBalance() {
+    this.clientService.updateClient(this.client);
+    this.flashMessage.show('Client updated', { cssClass: 'alert-success', timeout: 4000 });
+  }
 }

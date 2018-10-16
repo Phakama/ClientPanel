@@ -3,7 +3,6 @@ import { ClientService } from '../../services/client.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { Client } from '../../models/Client';
-import { timeout } from 'q';
 
 @Component({
   selector: 'app-client-details',
@@ -44,7 +43,7 @@ export class ClientDetailsComponent implements OnInit {
   }
 
   onDeleteClick() {
-    if(confirm('Are you sure?')) {
+    if (confirm('Are you sure?')) {
       this.clientService.deleteClient(this.client);
       this.flashMessage.show('Client removed', {
         cssClass: 'alert-success', timeout: 4000
